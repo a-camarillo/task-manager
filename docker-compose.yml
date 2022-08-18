@@ -1,4 +1,4 @@
-version: 3.9
+version: "3.9"
 
 services:
   server:
@@ -7,5 +7,13 @@ services:
     - ./server/:/app
     ports:
     - 5000:5000
+    env_file:
+    - .env
+  db:
+    image: postgres:latest
+    volumes:
+    - ./data/:/var/lib/postgresql/data
+    ports:
+    - 5432:5432
     env_file:
     - .env
