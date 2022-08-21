@@ -6,14 +6,14 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT;
 
+app.use(cors());
+
 // import routes
 const tasks = require('./routes/tasks');
 const projects = require('./routes/projects');
 
 app.use('/tasks', tasks);
 app.use('/projects', projects);
-
-app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('This is my express server');
