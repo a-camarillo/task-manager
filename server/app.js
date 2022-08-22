@@ -1,16 +1,14 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-require('dotenv').config();
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import 'dotenv/config';
+import tasks from './routes/tasks.js';
+import projects from './routes/projects.js';
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(cors());
-
-// import routes
-const tasks = require('./routes/tasks');
-const projects = require('./routes/projects');
 
 app.use('/tasks', tasks);
 app.use('/projects', projects);

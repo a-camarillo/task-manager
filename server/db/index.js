@@ -1,5 +1,6 @@
-const { Pool, Client } = require('pg');
-require('dotenv').config({path:'./../../.env'});
+import pg from 'pg';
+const { Pool, Client } = pg;
+import 'dotenv/config';
 
 const user = process.env.POSTGRES_USER;
 const host = process.env.POSTGRES_HOST;
@@ -15,8 +16,6 @@ const pool = new Pool({
     database: `${db}`  
 });
 
-module.exports = {
-    query: (text, params, callback) => {
+export function query(text, params, callback) {
         return pool.query(text, params, callback)
-    },
-}
+};

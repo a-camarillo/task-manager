@@ -1,8 +1,7 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import { query as db } from '../db/index.js';
 
-// import db adapter
-const db = require('../db');
+const router = express.Router();
 
 router.get('/', async (req, res) => {
     let { rows } = await db.query('SELECT * FROM projects')
@@ -28,4 +27,4 @@ router.post('/', async (req, res) => {
 });
 
 
-module.exports = router;
+export default router;
