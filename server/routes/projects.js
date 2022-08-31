@@ -15,16 +15,21 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/:id/tasks/', async (req, res) => {
-    let project_id = req.params.id
-    let { rows } = await db('SELECT * FROM tasks WHERE project_id = $1', [project_id])
+    let projectId = req.params.id
+    let { rows } = await db('SELECT * FROM tasks WHERE project_id = $1', [projectId])
     res.send(rows)
 });
 
 router.post('/', async (req, res) => {
-    let title = req.body
-    let { rows } = await db('INSERT INTO products (title) VALUES ($1)', [title])
-    res.send(rows[0])
+    let title = req.body.title
+    let { rows } = await db('INSERT INTO projects (title) VALUES ($1)', [title])
+    res.status(200).send(rows[0])
 });
 
+router.delete('/:id', async (req, res) => {
+    let id = req.params.id
+    await db('DELETE FROM projects WHERE id = $1', [id])
+    res.status(200).send(`Project ${id} has been deleted`)
+});
 
 export default router;
