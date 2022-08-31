@@ -4,7 +4,8 @@
   "description": "An app for managing tasks",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm --prefix ./client/ run start\" \"nodemon ./server/app.js\""
+    "dev": "concurrently \"npm --prefix ./client/ run start\" \"nodemon ./server/app.js\"",
+    "server": "nodemon ./server/app.js"
   },
   "author": "",
   "license": "MIT",
@@ -22,5 +23,6 @@
     "nodemon": "^2.0.19",
     "typescript": "^4.7.4"
   },
-  "type": "module"
+  "type": "module",
+  "proxy": "localhost:3000"
 }
