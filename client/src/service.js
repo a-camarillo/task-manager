@@ -20,6 +20,17 @@ const getProjects = async() => {
     }
 }
 
+const getProject = async(projectId) => {
+    console.log(projectId)
+    try {
+        const response = await axios.get(`http://localhost:5000/projects/${projectId}`);
+        console.log(response);
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 const getProjectTasks = async(projectId) => {
     try {
         const response = await axios.get(`http://localhost:5000/projects/${projectId}/tasks`);
@@ -55,4 +66,4 @@ const deleteProject= async(projectId) => {
     }
 }
 
-export { getTasks, getProjects, postProject, deleteProject, getProjectTasks };
+export { getTasks, getProjects, postProject, deleteProject, getProjectTasks, getProject };

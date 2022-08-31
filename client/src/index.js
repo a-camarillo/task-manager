@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Projects from './routes/projects';
+import Project from './routes/project';
 import Tasks from './routes/tasks';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -14,6 +15,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/projects" element={<Projects />} />
+      <Route path="/projects/:id" element={<Project />} />
       <Route path="/tasks" element={<Tasks />} />
     </Routes>
   </Router>
