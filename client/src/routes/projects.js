@@ -1,53 +1,43 @@
-import React from 'react';
-import { getProjects } from '../service';
+import React, { useState, useEffect } from 'react';
+import { getProjects, postProject, deleteProject } from '../service';
 
-class Project extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            isLoaded: false,
-            items: []
-        };
-    }
+const Projects = () => {
 
-    componentDidMount() {
-        getProjects()
-            .then(
-                (response) => {
-                    this.setState({
-                        isLoaded: true,
-                        items: response.data
-                    });
-            },
-            (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error
-                });
-            });
-        }
+    const [projects, setProjects] = useState([]);
     
+    useEffect(() => {
+        getProjects().then((response) => {
+            setProjects(response.data)
+        })
+    },[]);
 
-    render() {
-        const { error, isLoaded, items } = this.state;
-        if (error) {
-            return <div>Error: {error.message}</div>
-        } else if (!isLoaded) {
-            return <div>Loading... </div>
-        } else {
-            return (
-                <ul>
-                    {items.map(item => (
-                        <li key={item.id}>
-                            {item.title}  {new Date(item.created_at).toLocaleString()}
-                        </li>
-                    ))}
-                </ul>
-            );
-        }
-    }
+    const submitProject = (e) => {
+        e.preventDefault();
+        const projectTitle = e.target.title.value;
+        postProject(projectTitle);
+    };
+
+    return (
+        <div>
+            <ul>
+                {projects.map(project => (
+                    <li key={project.id} id={project.id}>
+                        {project.title} {new Date(project.created_at).toLocaleDateString()}
+                        <button onClick={() => deleteProject(project.id)}>Delete Here</button>
+                    </li>
+                ))}
+                
+            </ul>
+            <form onSubmit={submitProject}>
+                <label>
+                    Title: 
+                    <input type="text" name="title"/>
+                </label>
+                <input type="submit" name="Submit"/>
+            </form>
+        </div>
+    );
 }
 
 
-export default Project;
+export default Projects;
