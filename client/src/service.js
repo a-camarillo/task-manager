@@ -54,6 +54,19 @@ const postProject = async(title) => {
     }
 }
 
+const postTask = async(description, projectId) => {
+    try {
+        const response = await axios.post('http://localhost:5000/tasks', {
+            description: description,
+            project_id: projectId
+        })
+        window.location.reload();
+        console.log(response)
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 const deleteProject= async(projectId) => {
     console.log(projectId)
     try {
@@ -66,4 +79,4 @@ const deleteProject= async(projectId) => {
     }
 }
 
-export { getTasks, getProjects, postProject, deleteProject, getProjectTasks, getProject };
+export { getTasks, getProjects, postProject, deleteProject, getProjectTasks, getProject, postTask };

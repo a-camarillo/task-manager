@@ -9,10 +9,15 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    let { id } = req.params
+    let id = req.params.id
     let { rows } = await db('SELECT * FROM tasks WHERE id = $1', [id])
     res.send(rows[0])
 });
 
+router.post('/', async (req, res) => {
+    let { description, project_id } = req.body
+    let { rows } = await db('INSERT INTO tasks (description, project_id) VALUES ($1,$2)',[description, project_id]);
+    res.status(200).send(rows[0])
+})
 
 export default router;
