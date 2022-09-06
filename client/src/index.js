@@ -7,6 +7,7 @@ import Project from './routes/project';
 import Tasks from './routes/tasks';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.scss';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
