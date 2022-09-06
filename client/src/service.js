@@ -79,4 +79,12 @@ const deleteProject= async(projectId) => {
     }
 }
 
-export { getTasks, getProjects, postProject, deleteProject, getProjectTasks, getProject, postTask };
+export { 
+        getTasks, 
+        getProjects, 
+        postProject, 
+        deleteProject, 
+        getProjectTasks, 
+        getProject, 
+        postTask, 
+};
