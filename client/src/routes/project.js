@@ -14,7 +14,7 @@ const Project = () => {
     // Access the url parameters to get the project ID
     let { id } = useParams();
 
-    // GET request to the API projects endpoint and set the project state with the response
+    // GET request to the API projects/:id endpoint and set the project state with the response
     const [project, setProject] = useState({});
     useEffect(() => {
         getProject(id).then((response) => {
