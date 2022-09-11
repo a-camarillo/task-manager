@@ -43,14 +43,31 @@ const Project = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // logic for wrapping Rows every third task
+    const tasksCopy = [...tasks]
+    const rows = [...Array(Math.ceil(tasks.length / 3))];
+    const taskRows = rows.map((row,idx) => tasksCopy.slice(idx*3,idx*3 + 3));
+    const showTasks = taskRows.map( (row, idx) => (
+        <Row key={idx}>
+            {row.map( task => ( 
+                <Col key={task.id} md={4}>
+                    <Task task={task} />
+                </Col>
+            ))}
+        </Row>
+    ))
+
+
     return (
         <Container>
-            <h1 key={project.id}>
-                {project.title}
-            </h1>
-            <Button variant="primary" onClick={handleShow}>
-                Create New Task
-            </Button>
+            <Row>
+                <h1 key={project.id}>
+                    {project.title}
+                </h1>
+                <Button variant="primary" onClick={handleShow}>
+                    Create New Task
+                </Button>
+            </Row>
             <Modal show={show} 
             onHide={handleClose} 
             aria-labelledby="contained-modal-title-vcenter" 
@@ -80,13 +97,7 @@ const Project = () => {
                         </Form>
                 </Modal.Body>
             </Modal>
-            <Row className="justify-content-md-center">
-                {tasks.map(task => (
-                    <Col key={task.id}>
-                        <Task task={task}/>
-                    </Col>
-                ))}
-            </Row>
+            {showTasks}
         </Container>
     )
 }
