@@ -79,11 +79,23 @@ const deleteProject= async(projectId) => {
     }
 }
 
+const deleteTask = async(taskId) => {
+    try {
+        const response = await axios.delete(`http://localhost:5000/tasks/${taskId}`)
+        window.location.reload();
+        console.log(response)
+    }
+    catch (error) {
+        console.error(error)
+    }
+}
+
 export { 
         getTasks, 
         getProjects, 
         postProject, 
-        deleteProject, 
+        deleteProject,
+        deleteTask, 
         getProjectTasks, 
         getProject, 
         postTask, 

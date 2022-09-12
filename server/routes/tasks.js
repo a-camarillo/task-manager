@@ -20,4 +20,10 @@ router.post('/', async (req, res) => {
     res.status(200).send(rows[0])
 })
 
+router.delete('/:id', async (req, res) => {
+    let id = req.params.id
+    await db('DELETE FROM tasks WHERE id = $1', [id])
+    res.status(200).send(`Task ${id} has been deleted`)
+})
+
 export default router;
