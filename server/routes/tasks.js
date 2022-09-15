@@ -26,4 +26,10 @@ router.delete('/:id', async (req, res) => {
     res.status(200).send(`Task ${id} has been deleted`)
 })
 
+router.put('/:id', async (req, res) => {
+    let {id, description } = req.body
+    let { rows } = await db('UPDATE tasks SET description = $2 WHERE id = $1',[id, description]);
+    res.status(200).send(rows[0])
+})
+
 export default router;
