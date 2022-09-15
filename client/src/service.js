@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const baseUrl = 'http://localhost:5000'
+
 const getTasks = async() => {
     try {
-        const response = await axios.get('http://localhost:5000/tasks');
+        const response = await axios.get(`${baseUrl}/tasks`);
         console.log(response);
         return response;
     } catch (error) {
@@ -12,7 +14,7 @@ const getTasks = async() => {
 
 const getProjects = async() => {
     try {
-        const response = await axios.get('http://localhost:5000/projects');
+        const response = await axios.get(`${baseUrl}/projects`);
         console.log(response);
         return response;
     } catch (error) {
@@ -23,7 +25,7 @@ const getProjects = async() => {
 const getProject = async(projectId) => {
     console.log(projectId)
     try {
-        const response = await axios.get(`http://localhost:5000/projects/${projectId}`);
+        const response = await axios.get(`${baseUrl}/projects/${projectId}`);
         console.log(response);
         return response;
     } catch (error) {
@@ -33,7 +35,7 @@ const getProject = async(projectId) => {
 
 const getProjectTasks = async(projectId) => {
     try {
-        const response = await axios.get(`http://localhost:5000/projects/${projectId}/tasks`);
+        const response = await axios.get(`${baseUrl}/projects/${projectId}/tasks`);
         console.log(response);
         return response;
     } catch (error) {
@@ -44,7 +46,7 @@ const getProjectTasks = async(projectId) => {
 const postProject = async(title) => {
     console.log(title)
     try {
-        const response = await axios.post('http://localhost:5000/projects',{
+        const response = await axios.post(`${baseUrl}/projects`,{
             title
         })
         window.location.reload();
@@ -56,7 +58,7 @@ const postProject = async(title) => {
 
 const postTask = async(description, projectId) => {
     try {
-        const response = await axios.post('http://localhost:5000/tasks', {
+        const response = await axios.post(`${baseUrl}/tasks`, {
             description: description,
             project_id: projectId
         })
@@ -70,7 +72,7 @@ const postTask = async(description, projectId) => {
 const deleteProject= async(projectId) => {
     console.log(projectId)
     try {
-        const response = await axios.delete(`http://localhost:5000/projects/${projectId}`)
+        const response = await axios.delete(`${baseUrl}/projects/${projectId}`)
         window.location.reload();
         console.log(response)
     }
@@ -81,12 +83,27 @@ const deleteProject= async(projectId) => {
 
 const deleteTask = async(taskId) => {
     try {
-        const response = await axios.delete(`http://localhost:5000/tasks/${taskId}`)
+        const response = await axios.delete(`${baseUrl}/tasks/${taskId}`)
         window.location.reload();
         console.log(response)
     }
     catch (error) {
         console.error(error)
+    }
+}
+
+const updateTask = async(taskId, description) => {
+    try {
+        console.log(taskId)
+        console.log(description)
+        const response = await axios.put(`${baseUrl}/tasks/${taskId}`, {
+            id: taskId,
+            description: description
+        })
+        console.log(response)
+    }
+    catch (error) {
+        console.log(error)
     }
 }
 
@@ -98,5 +115,6 @@ export {
         deleteTask, 
         getProjectTasks, 
         getProject, 
-        postTask, 
+        postTask,
+        updateTask 
 };
