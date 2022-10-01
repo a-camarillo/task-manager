@@ -70,7 +70,6 @@ const postTask = async(description, projectId) => {
 }
 
 const deleteProject= async(projectId) => {
-    console.log(projectId)
     try {
         const response = await axios.delete(`${baseUrl}/projects/${projectId}`)
         window.location.reload();
@@ -94,11 +93,22 @@ const deleteTask = async(taskId) => {
 
 const updateTask = async(taskId, description) => {
     try {
-        console.log(taskId)
-        console.log(description)
         const response = await axios.put(`${baseUrl}/tasks/${taskId}`, {
             id: taskId,
             description: description
+        })
+        console.log(response)
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+const updateProject = async(projectId, title) => {
+    try {
+        const response = await axios.put(`${baseUrl}/projects/${projectId}`, {
+            id: projectId,
+            title: title
         })
         console.log(response)
     }
@@ -116,5 +126,6 @@ export {
         getProjectTasks, 
         getProject, 
         postTask,
-        updateTask 
+        updateTask,
+        updateProject 
 };

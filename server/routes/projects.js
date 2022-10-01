@@ -32,4 +32,10 @@ router.delete('/:id', async (req, res) => {
     res.status(200).send(`Project ${id} has been deleted`)
 });
 
+router.put('/:id', async (req, res) => {
+    let {id, title} = req.body
+    let { rows } = await db('UPDATE projects SET title = $2 WHERE id = $1', [id, title]);
+    res.status(200).send(rows[0])
+})
+
 export default router;
